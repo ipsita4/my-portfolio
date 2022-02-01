@@ -1,59 +1,36 @@
-import React from "react";
-import { useForm, ValidationError } from "@formspree/react";
-function ContactForm() {
-  const [state, handleSubmit] = useForm("mzboeeqv");
-  if (state.succeeded) {
-    return <p>Thanks for joining!</p>;
-  }
-  return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">Email Address</label>
-      <input id="email" type="email" name="email" />
-      <ValidationError prefix="Email" field="email" errors={state.errors} />
-      <textarea id="message" name="message" />
-      <ValidationError prefix="Message" field="message" errors={state.errors} />
-      <button type="submit" disabled={state.submitting}>
-        Submit
-      </button>
-    </form>
-  );
+let menu = document.querySelector('#menu-bars');
+let header = document.querySelector('header');
+
+menu.onclick = () =>{
+    menu.classList.toggle('fa-times');
+    header.classList.toggle('active');
 }
-function App() {
-  return <ContactForm />;
+
+window.onscroll = () =>{
+    menu.classList.remove('fa-times');
+    header.classList.remove('active');
 }
-export default App;
 
-let menu = document.querySelector("#menu-bars");
-let header = document.querySelector("header");
+let cursor1 = document.querySelector('.cursor-1');
+let cursor2 = document.querySelector('.cursor-2');
 
-menu.onclick = () => {
-  menu.classList.toggle("fa-times");
-  header.classList.toggle("active");
-};
+window.onmousemove = (e) =>{
+    cursor1.style.top = e.pageY + 'px';
+    cursor1.style.left = e.pageX + 'px';
+    cursor2.style.top = e.pageY + 'px';
+    cursor2.style.left = e.pageX + 'px';
+}
 
-window.onscroll = () => {
-  menu.classList.remove("fa-times");
-  header.classList.remove("active");
-};
+document.querySelectorAll('a').forEach(links =>{
 
-let cursor1 = document.querySelector(".cursor-1");
-let cursor2 = document.querySelector(".cursor-2");
+    links.onmouseenter = () =>{
+        cursor1.classList.add('active');
+        cursor2.classList.add('active');
+    }
 
-window.onmousemove = (e) => {
-  cursor1.style.top = e.pageY + "px";
-  cursor1.style.left = e.pageX + "px";
-  cursor2.style.top = e.pageY + "px";
-  cursor2.style.left = e.pageX + "px";
-};
+    links.onmouseleave = () =>{
+        cursor1.classList.remove('active');
+        cursor2.classList.remove('active');
+    }
 
-document.querySelectorAll("a").forEach((links) => {
-  links.onmouseenter = () => {
-    cursor1.classList.add("active");
-    cursor2.classList.add("active");
-  };
-
-  links.onmouseleave = () => {
-    cursor1.classList.remove("active");
-    cursor2.classList.remove("active");
-  };
 });
